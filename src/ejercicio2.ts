@@ -23,13 +23,13 @@ class Product {
     }
 
     comprar(cantidad: number, descuento: number): void {
-        this.precio *= cantidad
-        descuento = descuento * this.precio
-        const IVA = this.IVA * this.precio
-        const total: number = this.precio - IVA - descuento
+        const precioPorCantidad = this.precio * cantidad
+        descuento = descuento * precioPorCantidad
+        const IVA = this.IVA * precioPorCantidad
+        const total: number = precioPorCantidad - IVA - descuento
         console.log(`
             ****Cantidad de producto: ${cantidad}*****
-            ****Precio: $${this.precio.toFixed(2)} ******
+            ****Precio: $${this.precio} ******
             ****Descuento: $${descuento.toFixed(2)}****
             ****Iva: $${IVA.toFixed(2)}****
             ****Total a pagar: $${total.toFixed(2)}******
