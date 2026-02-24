@@ -1,29 +1,53 @@
+import * as readline from "node:readline";
 
-(() => {
-
-    class Persona {
-        nombre: string;
-        edad: number;
-        telefono: number;
-
-        constructor(nombre: string, edad: number, telefono: number) {
-            this.nombre = nombre;
-            this.edad = edad;
-            this.telefono = telefono;
-        }
-
-        mostrar(): void {
-            alert(`Tu nombre es: ${this.nombre}\n
-                Tu edad es: ${edad}\n
-                Tu número de teléfono es: ${telefono}`)
-        }
-
+class Programa {
+    private rl: readline.Interface;
+    constructor() {
+        this.rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        })
     }
 
-    let nombre: string = prompt("Ingrese su nombre") || "";
-    let edad: number = parseInt(prompt("Ingrese su edad") || "");
-    let telefono: number = parseInt(prompt("Ingrese su telefono") || "");
-    let people = new Persona(nombre, edad, telefono)
-    people.mostrar()
+    iniciar(): void {
+        this.pedirNumero();
+    }
 
-})()
+    pedirNumero(): void {
+        this.rl.question("Ingresar número ", (respuesta: string) => {
+            const numero = Number(respuesta);
+            this.evaluarNumero(numero);
+            this.evaluarParOInpar(numero);
+            this.cerrar()
+
+        })
+    }
+
+    evaluarNumero(numero: number): void {
+        if (numero > 10) {
+            console.log('Es mayor que 10');
+
+        } else if (numero === 10) {
+            console.log('Es igual que 10');
+
+        } else {
+            console.log('Es menor que 10');
+        }
+    }
+
+    evaluarParOInpar(num: number) {
+        if (num % 2 == 0) {
+            console.log(`${num} es par`);
+
+        } else {
+            console.log(`${num} es impar`);
+        }
+    }
+
+    cerrar(): void {
+        this.rl.close();
+    }
+}
+
+const app = new Programa();
+app.iniciar();
