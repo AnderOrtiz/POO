@@ -1,88 +1,91 @@
-// class GYM {
-// peso: number;
-// estatura: number;
-//     constructor(public peso: number, public estatura: number) {
-//         this.estatura = estatura;
-//         this.peso = peso;
+/**
+Crear una clase Estudiante que contenga los siguientes atributos:
+
+nombre (string)
+carnet (string)
+notaFinal (number)
+La clase debe incluir:
+
+Un constructor para inicializar los atributos.
+Un método mostrarInformacion() que imprima los datos del estudiante.
+Posteriormente, instanciar al menos dos objetos y ejecutar el método en cada uno para observar cómo funcionan de manera independiente.
+ */
+
+// class Estudiante {
+//     private nombre: string
+//     private readonly carnet: string;
+//     notaFinal: number = 0;
+//     constructor(nombre: string, carnet: string, notaFinal: number) {
+//         this.nombre = nombre;
+//         this.carnet = carnet;
+//         this.notaFinal = notaFinal;
 //     }
 
-//     public IMC(): void {
-//         let imc = this.peso / (this.estatura) ** 2 //Math.pow(this.estatura, 2) // 2
-//         if (imc < 18.5) {
-//             console.log(`\n Tu índice de masa corporal indica bajo peso: ${imc.toFixed(2)}\n`);
+//     mostrarInformacion() {
+//         console.log(`Estudiante ${this.nombre}`);
+//         console.log(`Carnet ${this.carnet}`);
+//         console.log(`Nota Final ${this.notaFinal}`);
 
-//         } else if (imc < 24.9) {
-//             console.log(`\n Tu índice de masa corporal indica que es nomal: ${imc.toFixed(2)}\n`);
+//     }
 
-//         } else if (imc < 29.9) {
-//             console.log(`\n Tu índice de masa corporal indica sobrepeso: ${imc.toFixed(2)}\n`);
+//     actualizarNota(nota: number) {
+//         if (nota <= 0 && nota >= 10) {
+//             console.log('Nota no válida');
 
 //         } else {
-//             console.log(`\n Tu índice de masa corporal indica obesidad: ${imc.toFixed(2)}\n`);
+//             this.notaFinal = nota;
+//             console.log(`La nota se actalizó a ${this.notaFinal}`);
 //         }
 //     }
+
 // }
 
-// const yo = new GYM(77, 1.70)
-
-// yo.IMC()
-
-
-// class Conversor {
-//     constructor(public temperatura: number) {
-//         this.temperatura = temperatura
-//     }
-
-//     public fahrenheitTOCelsius(): void {
-//         const celsius = (this.temperatura - 32) / 1.8
-//         console.log(`Conversión Fahrenheit a Celsius: ${celsius.toFixed(2)}°C`);
-//     }
-
-//     public celsiusTOFahrenheit(): void {
-//         const fahrenheit = (this.temperatura * (9 / 5)) + 32
-//         console.log(`Conversión Celsius a Fahrenheit: ${fahrenheit.toFixed(2)}°F`);
-//     }
-
-//     public kelvinToFahrenheit(): void {
-//         const fahrenheit = (((this.temperatura - 273.15) * (9 / 5)) + 32)
-//         console.log(`Conversión Kelvin a Fahrenheit: ${fahrenheit.toFixed(2)}°F`);
-//     }
-
-//     public kelvinToCelsius(): void {
-//         const celsius = this.temperatura - 273.15
-//         console.log(`Conversión Kelvin a Celsius: ${celsius.toFixed(2)}°C`);
-//     }
-// }
-
-// const temperatura = new Conversor(77)
-// temperatura.celsiusTOFahrenheit()
+// const alumno1 = new Estudiante('Requeno', 'U20200000', 7);
+// alumno1.mostrarInformacion();
+// alumno1.actualizarNota(4)
 
 
-class Instituto {
-    constructor(public falta: number, public nombre: string) {
-        this.falta = falta
-        this.nombre = nombre
+
+/**
+Enunciado:
+
+Crear una clase Producto que incluya:
+
+nombre (string)
+precio (number)
+cantidad (number)
+La clase debe tener:
+
+Un constructor que inicialice los atributos.
+Un método calcularTotal() que retorne el total (precio × cantidad).
+Un método mostrarDetalle() que imprima la información del producto.
+Instanciar al menos un objeto y ejecutar sus métodos.
+ */
+
+class Producto {
+    nombre: string
+    precio: number
+    cantidad: number
+
+    constructor(nombre: string, precio: number, cantidad: number) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
     }
 
-    public selection(): void {
-        if (this.falta == 1) {
-            console.log(`Hi ${this.nombre}, tu falta es de $${this.falta}`);
+    calcularTotal() {
+        const total = this.precio * this.cantidad;
+        console.log(`El total es de $${total}\n`);
+    }
 
-        } else if (this.falta == 3) {
-            console.log(`Hi ${this.nombre}, tu falta es de $${this.falta}`);
+    mostrarDetalle() {
+        console.log(`Nombre: ${this.nombre}`);
+        console.log(`Precio: $${this.precio}`);
+        console.log(`Cantidad: ${this.cantidad}`);
 
-        } else if (this.falta == 5) {
-            console.log(`Hi ${this.nombre}, tu falta es de $${this.falta}`);
-
-        } else if (this.falta == 10) {
-            console.log(`Hi ${this.nombre}, tu falta es de $${this.falta}`);
-
-        } else {
-            console.log(`Falta no permitida habla con tu docente`);
-
-        }
     }
 }
 
-const doe = new Instituto(3, 'John Doe')
-doe.selection()
+const producto1 = new Producto('Rambo', 12, 2)
+producto1.calcularTotal();
+producto1.mostrarDetalle();
