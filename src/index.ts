@@ -1,91 +1,115 @@
-/**
-Crear una clase Estudiante que contenga los siguientes atributos:
+import * as readline from "readline";
 
-nombre (string)
-carnet (string)
-notaFinal (number)
-La clase debe incluir:
+class Clientes {
 
-Un constructor para inicializar los atributos.
-Un método mostrarInformacion() que imprima los datos del estudiante.
-Posteriormente, instanciar al menos dos objetos y ejecutar el método en cada uno para observar cómo funcionan de manera independiente.
- */
+    iniciar() {
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
 
-// class Estudiante {
-//     private nombre: string
-//     private readonly carnet: string;
-//     notaFinal: number = 0;
-//     constructor(nombre: string, carnet: string, notaFinal: number) {
-//         this.nombre = nombre;
-//         this.carnet = carnet;
-//         this.notaFinal = notaFinal;
-//     }
+        rl.question('Ingrese su nombre: ', (nombre) => {
+            rl.question('Ingrese su fecha de nacimiento (dd-mm-yyyy): ', (fechaNacimiento) => {
+                rl.question('Ingrese su estado familiar: ', (estadoFamiliar) => {
+                    rl.question('Ingrese su sueldo: ', (sueldo) => {
 
-//     mostrarInformacion() {
-//         console.log(`Estudiante ${this.nombre}`);
-//         console.log(`Carnet ${this.carnet}`);
-//         console.log(`Nota Final ${this.notaFinal}`);
+                        const edad = (2026 - parseInt(fechaNacimiento.slice(6, 10)));
+                        const sueldoNum = parseFloat(sueldo);
 
-//     }
-
-//     actualizarNota(nota: number) {
-//         if (nota <= 0 && nota >= 10) {
-//             console.log('Nota no válida');
-
-//         } else {
-//             this.notaFinal = nota;
-//             console.log(`La nota se actalizó a ${this.notaFinal}`);
-//         }
-//     }
-
-// }
-
-// const alumno1 = new Estudiante('Requeno', 'U20200000', 7);
-// alumno1.mostrarInformacion();
-// alumno1.actualizarNota(4)
-
-
-
-/**
-Enunciado:
-
-Crear una clase Producto que incluya:
-
-nombre (string)
-precio (number)
-cantidad (number)
-La clase debe tener:
-
-Un constructor que inicialice los atributos.
-Un método calcularTotal() que retorne el total (precio × cantidad).
-Un método mostrarDetalle() que imprima la información del producto.
-Instanciar al menos un objeto y ejecutar sus métodos.
- */
-
-class Producto {
-    nombre: string
-    precio: number
-    cantidad: number
-
-    constructor(nombre: string, precio: number, cantidad: number) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.cantidad = cantidad;
+                        this.evaluarCliente(nombre.trim(), fechaNacimiento, estadoFamiliar.toLocaleLowerCase(), sueldoNum, edad);
+                        rl.close();
+                    });
+                });
+            });
+        });
     }
 
-    calcularTotal() {
-        const total = this.precio * this.cantidad;
-        console.log(`El total es de $${total}\n`);
-    }
+    evaluarCliente(nombre: string, fechaNacimiento: string, estadoFamiliar: string, sueldo: number, edad: number) {
+        if (estadoFamiliar == 'casado' &&
+            (edad) >= 22 &&
+            (edad) < 32 &&
+            sueldo > 450 &&
+            sueldo < 600
+        ) {
+            console.log(
+                `${nombre}, ${estadoFamiliar} de ${edad} años con un sueldo de $${sueldo}\n
+                Se le permite otorgar el prestamo de $20000`
+            );
 
-    mostrarDetalle() {
-        console.log(`Nombre: ${this.nombre}`);
-        console.log(`Precio: $${this.precio}`);
-        console.log(`Cantidad: ${this.cantidad}`);
+
+        } else if (estadoFamiliar == 'casado' &&
+            (edad) >= 32 &&
+            sueldo > 601 &&
+            sueldo < 1000
+        ) {
+            console.log(
+                `${nombre}, ${estadoFamiliar} de ${edad} años con un sueldo de $${sueldo}\n
+                Se le permite otorgar el prestamo de $30000`
+            );
+
+
+        } else if (estadoFamiliar == 'soltero' &&
+            (edad) > 21 &&
+            (edad) < 30 &&
+            sueldo > 400 &&
+            sueldo < 600
+        ) {
+            console.log(
+                `${nombre}, ${estadoFamiliar} de ${edad} años con un sueldo de $${sueldo}\n
+                Se le permite otorgar el prestamo de $2500`
+            );
+
+
+        } else if (estadoFamiliar == 'soltero' &&
+            (edad) >= 30 &&
+            sueldo > 601 &&
+            sueldo < 1000
+        ) {
+            console.log(
+                `${nombre}, ${estadoFamiliar} de ${edad} años con un sueldo de $${sueldo}\n
+                Se le permite otorgar el prestamo de $3500`
+            );
+
+
+        } else if (estadoFamiliar == 'viudo' &&
+            (edad) >= 35 &&
+            sueldo > 600 &&
+            sueldo < 1500
+        ) {
+            console.log(
+                `${nombre}, ${estadoFamiliar} de ${edad} años con un sueldo de $${sueldo}\n
+                Se le permite otorgar el prestamo de $4000`
+            );
+        } else {
+            console.log(
+                `${nombre}, ${estadoFamiliar} de ${edad} años con un sueldo de $${sueldo}\n
+                Lamentamos informarle que no cumple los requisitos para un prestamo`
+            );
+        }
 
     }
 }
 
-const producto1 = new Producto('Rambo', 12, 2)
-producto1.calcularTotal();
-producto1.mostrarDetalle();
+const cliente = new Clientes()
+cliente.iniciar()
+
+
+
+
+// const cliente1 = new Clientes('Carlos Mendoza', '10-05-2000', 'casado', 500)
+// cliente1.evaluarCliente()
+
+// const cliente2 = new Clientes('Luis Herrera', '15-03-1990', 'casado', 800)
+// cliente2.evaluarCliente()
+
+// const cliente3 = new Clientes('Mario López', '20-07-2002', 'soltero', 500)
+// cliente3.evaluarCliente()
+
+// const cliente4 = new Clientes('Andrés Ramírez', '11-09-1995', 'soltero', 700)
+// cliente4.evaluarCliente()
+
+// const cliente5 = new Clientes('Pedro Castillo', '08-02-1985', 'viudo', 900)
+// cliente5.evaluarCliente()
+
+// const cliente6 = new Clientes('Diego Flores', '01-01-2008', 'soltero', 300)
+// cliente6.evaluarCliente()
