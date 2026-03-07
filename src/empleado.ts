@@ -5,6 +5,8 @@ export class Empleado {
         public genero: generoEmpleado,
         public edad: number,
         public numeroEmpleado: number) {
+
+            this.ValidarDatos(nombre, genero, edad, numeroEmpleado);
     }
 
     trabajar() {
@@ -12,9 +14,9 @@ export class Empleado {
     }
 
     private ValidarDatos(nombre: string, genero: generoEmpleado, edad: number, numeroEmpleado: number) {
-        if (nombre.trim().length < 3) throw new Error('El nombre tiene que tener al enos 3 caractere')
+        if (nombre.trim().length === 0) throw new Error('El nombre no puede estar vacío')
         if (genero !== 'F' && genero !== 'M') throw new Error('EL genero dee ser M o F')
-        if (edad < 10) throw new Error('El empleado debe ser mayor de edad')
+        if (edad <= 18) throw new Error('El empleado debe ser mayor a 18')
         if (numeroEmpleado < 10000000) throw new Error('El numero de empleado debe ser mayor a 10000000')
     }
 }
