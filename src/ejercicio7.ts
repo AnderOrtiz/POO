@@ -10,8 +10,7 @@ class Taxi extends Transporte {
 
     calcularCosto(distancia: number): void {
         let costo = distancia * 2
-        costo.toFixed(2)
-        return console.log(`Su total a pagar es de: ${costo}`)
+        console.log(`Su total a pagar es de: ${costo.toFixed(2)}`)
     }
 }
 
@@ -22,8 +21,7 @@ class Autobus extends Transporte {
 
     calcularCosto(distancia: number): void {
         let costo = distancia * 0.15
-        costo.toFixed(2)
-        return console.log(`Su total a pagar es de: ${costo}`)
+        console.log(`Su total a pagar es de: ${costo.toFixed(2)}`)
     }
 }
 
@@ -34,8 +32,7 @@ class Uber extends Transporte {
 
     calcularCosto(distancia: number): void {
         let costo = distancia * 2
-        costo.toFixed(2)
-        return console.log(`Su total a pagar es de: ${costo}`)
+        console.log(`Su total a pagar es de: ${costo.toFixed(2)}`)
     }
 }
 
