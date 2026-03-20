@@ -54,6 +54,8 @@ class Procesador {
     }
 }
 
+// flujo de datos -|
+
 const op1 = new Sumar(10);
 const op2 = new Multiplicar(2);
 const op3 = new Restar(5);
