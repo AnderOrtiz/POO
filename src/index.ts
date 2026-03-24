@@ -1,37 +1,27 @@
-abstract class ProcesadorArchivos {
-    public nombreArchivo: string;
-    // public estadoArchivo: string;
+class CuentaBancaria {
+    constructor(private _saldo: number) { }
 
-    constructor(nombreArchivo: string, estadoArchivo: string) {
-        this.nombreArchivo = nombreArchivo;
+    get saldo(): number {
+        return this._saldo;
     }
-    abstract convertir(archivo: string): string;
-}
 
-//convertir de PNG a JPG
-class ProcesadorImagenPNG extends ProcesadorArchivos {
-    public nombreArchivoIMG = ""
 
-    constructor(nombreArchivo: string, estadoArchivo: string) {
-        super(nombreArchivo, estadoArchivo)
-        this.validacion(nombreArchivo)
+    set saldo(v: number) {
+        if (v < 0) {
+            console.log(`No se permite saldo negativo`);
+            return;
+        }
+        this._saldo = v;
     }
-    convertir(archivo: string): string {
-        let nombreArchivo = archivo.split('.')
-        this.nombreArchivoIMG = nombreArchivo[0] + ".JPG";
-        return this.nombreArchivoIMG
-    }
-    private validacion(nombreArchivo: string) {
-        let formato = nombreArchivo.split(".")
 
-        if (formato[-1] === "PNG" || formato[-1] === "png") {
-            throw new Error("El archivo no es formato PNG")
+    depositar(monto: number) {
+        if (monto > 0) {
+            this._saldo = monto;
         }
     }
 }
 
-const imagenPNG = new ProcesadorImagenPNG("imagen.png", "")
-console.log(imagenPNG.convertir("captura.png"))
-console.log(imagenPNG.convertir("imagen.png"))
-console.log(imagenPNG.convertir("Foto.PNG"))
-console.log(imagenPNG.convertir("img.png"))
+const cuenta = new CuentaBancaria(1500);
+cuenta.saldo = 5000;
+cuenta.depositar(100);
+console.log(cuenta.saldo);
