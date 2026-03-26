@@ -1,27 +1,52 @@
-class CuentaBancaria {
-    constructor(private _saldo: number) { }
+class Banco {
+    constructor(public cliente: string, protected saldo: number) { }
 
-    get saldo(): number {
-        return this._saldo;
+    mostrar(): void {
+        console.log(`Saldo ${this.saldo}`);
     }
 
-
-    set saldo(v: number) {
-        if (v < 0) {
-            console.log(`No se permite saldo negativo`);
-            return;
-        }
-        this._saldo = v;
+    get getSaldo(): number {
+        return this.saldo
     }
 
-    depositar(monto: number) {
-        if (monto > 0) {
-            this._saldo = monto;
-        }
+    set setSaldo(v: number) {
+        if (v >= 0) { this.saldo = v; return }
+
+        console.log('El debe ser cero o mayor a cero');
+
+    }
+
+}
+
+const objeto = new Banco("Porfirio", 100);
+
+objeto.cliente = "Juan";
+objeto.setSaldo = 1000;
+objeto.mostrar();
+
+
+class movimientos extends Banco {
+    constructor(nombre: string, saldo: number, public deposito: number) {
+        super(nombre, saldo);
+    }
+
+    comision(nuevoMonto: number) {
+        let salida = nuevoMonto - 1;
+        this.saldo = salida
+        console.log(`Te cobre por la transferencia nuevo saldo = $${salida}`);
+        return salida;
+    }
+
+    procesoDeposito() {
+        const nuevoMonto = this.deposito + this.saldo;
+        this.saldo = nuevoMonto
+        console.log(`nuevo saldo ${nuevoMonto}`);
+        this.comision(nuevoMonto)
     }
 }
 
-const cuenta = new CuentaBancaria(1500);
-cuenta.saldo = 5000;
-cuenta.depositar(100);
-console.log(cuenta.saldo);
+const dep = 25;
+const proceso = new movimientos('Porfirio', 100, 500);
+proceso.setSaldo = 1000;
+proceso.procesoDeposito();
+proceso.mostrar();
