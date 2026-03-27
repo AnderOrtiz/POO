@@ -1,33 +1,34 @@
 class Producto {
-    constructor(public nombre: string,
+    constructor(
+        public nombre: string,
         public precio: number,
         private stock: number,
         private user: { name: string, rol: string }
     ) { }
 
-    set aumentarStock(cantidad: number) {
-        if (this.user.name != 'admin') {
+    aumentarStock(cantidad: number): void {
+        if (this.user.rol != 'admin') {
             console.log('No tienes permisos');
-            return
+            return;
         }
 
         if (cantidad <= 0) {
             console.log('Cantidad inválida');
-            return
+            return;
         }
 
         this.stock += cantidad;
     }
 
-    set disminuirStock(cantidad: number) {
-        if (this.user.name != 'admin') {
+    disminuirStock(cantidad: number): void {
+        if (this.user.rol != 'admin') {
             console.log('No tienes permisos');
-            return
+            return;
         }
 
         if (cantidad <= 0) {
             console.log('Cantidad inválida');
-            return
+            return;
         }
 
         if (cantidad > this.stock) {
@@ -38,27 +39,26 @@ class Producto {
         this.stock -= cantidad;
     }
 
-    get mostrarInformacion() {
+    mostrarInformacion(): void {
         if (this.user.rol == 'admin') {
-            return console.log(`${this.nombre}, ${this.precio}, ${this.stock}`);
+            console.log(`${this.nombre}, ${this.precio}, ${this.stock}`);
+            return;
         }
-        return console.log(`${this.nombre}, ${this.precio}`);
+        console.log(`${this.nombre}, ${this.precio}`);
     }
 }
 
 const admin = { name: 'Carlos', rol: 'admin' };
 const cliente = { name: 'Ana', rol: 'cliente' };
 
-const productoadmin = new Producto('Laptop', 1000, 10, admin);
+const productoadmin = new Producto('Laptop', 1000, 0, admin);
 
-productoadmin.aumentarStock = 5;
-productoadmin.disminuirStock = 3;
+productoadmin.aumentarStock(5);
+productoadmin.disminuirStock(3);
+productoadmin.mostrarInformacion();
 
-productoadmin.mostrarInformacion;
+const productocliente = new Producto('Laptop', 1000, 0, cliente);
 
-const productocliente = new Producto('Laptop', 1000, 10, cliente);
-
-productocliente.aumentarStock = 5;
-productocliente.disminuirStock = 3;
-
-productocliente.mostrarInformacion;
+productocliente.aumentarStock(5);
+productocliente.disminuirStock(3);
+productocliente.mostrarInformacion();
