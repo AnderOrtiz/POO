@@ -2,19 +2,13 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    "rewriteRelativeImportExtensions": true,
-    "allowImportingTsExtensions": true,
     "rootDir": "./src",
     "outDir": "./dist",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "es6",
-    "moduleResolution": "node",
-    "ignoreDeprecations": "6.0",
-    "target": "ES2020",
-    "types": [
-      "node"
-    ],
+    "types": [],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -36,10 +30,14 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": false
   }
 }

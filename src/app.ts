@@ -10,3 +10,7 @@ app.use("/usuarios", router);
 app.listen(3000, () => {
     console.log("El servidor está corriendo en puerto 3000");
 })
+
+app.get("/", (req, res) => {
+    res.send("API funcionando 🚀");
+});
