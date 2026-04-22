@@ -1,0 +1,45 @@
+# version: '3'  # <--- La versión ya no es necesaria especificarla
+
+services:
+  db:
+    container_name: mysql-database
+    image: mysql:9.6.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+    volumes:
+      - ./mysql-db:/var/lib/mysql
+    ports:
+      - "${DB_PORT}:3306"
+    networks:
+      - mysql-network
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    networks:
+      - mysql-network
+
+
+# volumes:
+#   mysql-db:
+
+networks:
+  mysql-network:
+
+
+# https://gist.github.com/Klerith/86baf403cc922d03c86fac0b5ceacd3b
+
+
+

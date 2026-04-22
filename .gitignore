@@ -28,7 +28,7 @@ build/
 # Environment variables
 # ======================
 .env
-.env.*
+
 
 # ======================
 # TypeScript
@@ -40,3 +40,5 @@ build/
 # ======================
 .vscode/
 .idea/
+
+mysql-db/
